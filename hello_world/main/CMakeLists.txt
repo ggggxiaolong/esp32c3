@@ -1,2 +1,7 @@
-idf_component_register(SRCS "create_task.c" "hello_world_main.c"
-                    INCLUDE_DIRS "")
+# idf_component_register(SRCS "hello_world_main.c" "hello/hello_world.c" INCLUDE_DIRS "")
+# idf_component_register(SRCS "hello_world_main.c" "blink/blink.c" INCLUDE_DIRS "")
+# idf_component_register(SRCS "hello_world_main.c" "task/create_task.c" INCLUDE_DIRS "")
+# idf_component_register(SRCS "hello_world_main.c" "task/task_param.c" INCLUDE_DIRS "")
+# idf_component_register(SRCS "hello_world_main.c" "task/task_priority.c" INCLUDE_DIRS "")
+idf_component_register(SRCS "hello_world_main.c" "task/task_suspend.c" INCLUDE_DIRS "")
+# idf_component_register(SRCS "hello_world_main.c" INCLUDE_DIRS "")
