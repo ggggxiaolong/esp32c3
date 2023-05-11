@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
-#include "event/group_wait.h"
+#include "task/task_notify_value.h"
 
 void app_main(void)
 {
     printf("app_main \n");
-    task_group_wait_case();
+    test_notify_value_case_1();
 }
