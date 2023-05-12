@@ -67,7 +67,7 @@ void test_multiple_case_1()
         TaskHandle_t h_task_1, h_task_2, h_task_3;
         xTaskCreate(task_sender_1, "task_sender_1", 1024 * 5, (void *)queue, 1, &h_task_1);
         xTaskCreate(task_sender_2, "task_sender_2", 1024 * 5, (void *)queue, 1, &h_task_2);
-        xTaskCreate(task_receive_1, "task_receive_1", 1024 * 5, (void *)queue, 1, &h_task_3);
+        xTaskCreate(task_receive_1, "task_receive_1", 1024 * 5, (void *)queue, 2, &h_task_3);
 
         vTaskDelay(10000 / portTICK_PERIOD_MS);
         printf("finished\n");

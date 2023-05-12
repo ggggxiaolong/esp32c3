@@ -15,12 +15,16 @@
 4. 常用指令
 
    ```shell
+   // 设置环境变量
+   . $HOME/esp/esp-idf/export.sh
    // 构建
    idf.py build 
    // 刷写
    idf.py flash
    // 终端 Ctrl + ] 退出
    /home/MrTan/.espressif/python_env/idf5.0_py3.11_env/bin/python /home/MrTan/esp/esp-idf/tools/idf_monitor.py -p /dev/ttyACM0 -b 460800 --toolchain-prefix riscv32-esp-elf- --target esp32c3 /home/MrTan/project/esp32c3/hello_world/build/hello_world.elf
+   // 一键构建刷写并打开终端
+   idf.py -p /dev/ttyACM0 flash monitor
    ```
 
 
@@ -49,17 +53,33 @@
    char 类型变量前缀为 c
 
    char * 类型变量前缀为 pc
-   
+
    > 函数
-   
+
    返回值类型 + 所在文件 + 功能名称
-   
+
    vTaskDelete 该函数返回值为 void 型，定义在 tasks.c，作用是 delete
-   
+
    xQueueReceive()函数的返回值为 portBASE_TYPE 型，在 queue.c 这个文件中定义，函数作用是 receive 接收。
-   
+
    > 宏
-   
+
    宏的名字起始部分为该宏定义所在的文件名的一部分
-   
+
    configUSE_PREEMPTION 表示定义在 FreeRTOSConfig.h 文件中，作用是 USE_PREEMPTION。
+
+7. idf切换到新的分支
+
+   ```shell
+   // 切换到idf目录
+   cd idf
+   // 拉取最新的提交
+   git fetch
+   // 切换到最新tag
+   git checkout v5.0.2
+   // 由于跟新子模块失败，需要删除子模块重新拉取
+   rm -rf components
+   git submodule update --init --recursive	
+   ```
+
+   

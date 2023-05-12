@@ -15,8 +15,7 @@ void task_notify_1(void *pvParam)
     {
         // printf("task1 is waiting \n");
         // 进入时清空的位， 退出时清空的位， 当前的通知值, 等待时间
-        xTaskNotifyWait(0x00, ULONG_MAX, &notify_value, portMAX_DELAY);
-        xTaskNotifyGive(task_2);
+        xTaskNotifyWait(0x00, 0x00, &notify_value, portMAX_DELAY);
         if ((notify_value & BIT_0) != 0)
         {
             printf("task1 processing bit0 \n");
