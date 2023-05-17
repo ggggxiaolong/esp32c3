@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <script>
+            function runWs() {
+                const element = document.getElementById("msg");
+                const client = new WebSocket("ws://192.168.101.3/ws");
+                client.onopen = function () {
+                    client.send("Start receive");
+                };
+                if (element) {
+                    client.onmessage = function (ev) {
+                        element.innerText = ev.data;
+                    };
+                }
+            }
+        </script>
+    </header>
+    <body>
+        <div>
+            <a href="javascript:runWs()">启动WS</a>
+            <p id="msg">No data</p>
+        </div>
+    </body>
+</html>

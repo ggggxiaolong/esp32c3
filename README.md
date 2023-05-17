@@ -82,4 +82,20 @@
    git submodule update --init --recursive	
    ```
 
+8. vscode创建新的示例项目并用vscode idf 终端设置 `target` 的时候如果报错，使用系统的终端执行就可以了
+
+   ```
+    idf.py -DIDF_TARGET=esp32c3 reconfigure
+   Executing action: reconfigure
+   Running cmake in directory /home/MrTan/project/esp32c3/softAP/build
+   Executing "cmake -G Ninja -DPYTHON_DEPS_CHECKED=1 -DESP_PLATFORM=1 -DIDF_TARGET=esp32c3 -DCCACHE_ENABLE=0 /home/MrTan/project/esp32c3/softAP"...
+   CMake Error at /home/MrTan/esp/esp-idf/tools/cmake/targets.cmake:19 (message):
+     IDF_TARGET in CMake cache does not match IDF_TARGET environment variable.
+     To change the target, clear the build directory and sdkconfig file, and
+     build the project again
+   Call Stack (most recent call first):
+     /home/MrTan/esp/esp-idf/tools/cmake/project.cmake:7 (__target_init)
+     CMakeLists.txt:5 (include)
+   ```
+
    
