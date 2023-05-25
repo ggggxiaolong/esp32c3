@@ -23,5 +23,6 @@
 # idf_component_register(SRCS "app_main.c" "stream/send.c" INCLUDE_DIRS "")
 # idf_component_register(SRCS "app_main.c" "stream/buffer_size.c" INCLUDE_DIRS "")
 # idf_component_register(SRCS "app_main.c" "message/send.c" INCLUDE_DIRS "")
-idf_component_register(SRCS "app_main.c" "gdb/test.c" INCLUDE_DIRS "")
+# idf_component_register(SRCS "app_main.c" "gdb/test.c" INCLUDE_DIRS "")
+idf_component_register(SRCS "app_main.c" "st7735/esp_lcd_panel_st7735.c" INCLUDE_DIRS "")
 # idf_component_register(SRCS "app_main.c" INCLUDE_DIRS "" PRIV_REQUIRES blink)

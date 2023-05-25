@@ -207,6 +207,8 @@ blecent_scan(void)
     if (rc != 0) {
         MODLOG_DFLT(ERROR, "Error initiating GAP discovery procedure; rc=%d\n",
                     rc);
+    } else {
+         MODLOG_DFLT(INFO, "blecent_scan\n");
     }
 }
 
@@ -378,7 +380,7 @@ blecent_gap_event(struct ble_gap_event *event, void *arg)
     struct ble_hs_adv_fields fields;
     int rc;
     peer_disc_fn *disc_cb = NULL;
-
+    MODLOG_DFLT(INFO, "blecent_gap_event, type: %d\n", event->type);
     switch (event->type) {
     case BLE_GAP_EVENT_DISC:
         rc = ble_hs_adv_parse_fields(&fields, event->disc.data,
