@@ -99,7 +99,7 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_lcd_panel_init(panel_handle));
     // ESP_LOGI(TAG, "esp_lcd_panel_mirror");
     // ESP_ERROR_CHECK(esp_lcd_panel_mirror(panel_handle, true, false));
-    esp_lcd_panel_set_gap(panel_handle, 26, 1);
+    esp_lcd_panel_set_gap(panel_handle, 1, 26);
 
     // ESP_LOGI(TAG, "buf size: %d", EXAMPLE_LCD_BUF_SIZE);
     uint16_t *buff;
@@ -108,24 +108,24 @@ void app_main(void)
     {
         buff[i] = ST7735_WHITE;
     }
-    esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, EXAMPLE_LCD_V_RES , EXAMPLE_LCD_H_RES, buff);
-    vTaskDelay(pdMS_TO_TICKS(1000));
-    for (size_t i = 0; i < EXAMPLE_LCD_BUF_SIZE / 2; i++)
-    {
-        buff[i] = ST7735_BLUE;
-    }
-    esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, EXAMPLE_LCD_V_RES , EXAMPLE_LCD_H_RES, buff);
+    esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, EXAMPLE_LCD_H_RES, EXAMPLE_LCD_V_RES, buff);
     vTaskDelay(pdMS_TO_TICKS(2000));
     for (size_t i = 0; i < EXAMPLE_LCD_BUF_SIZE / 2; i++)
     {
         buff[i] = ST7735_RED;
     }
-    esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, EXAMPLE_LCD_V_RES , EXAMPLE_LCD_H_RES, buff);
+    esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, EXAMPLE_LCD_H_RES, EXAMPLE_LCD_V_RES, buff);
     vTaskDelay(pdMS_TO_TICKS(2000));
     for (size_t i = 0; i < EXAMPLE_LCD_BUF_SIZE / 2; i++)
     {
         buff[i] = ST7735_GREEN;
     }
-    esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, EXAMPLE_LCD_V_RES , EXAMPLE_LCD_H_RES, buff);
+    esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, EXAMPLE_LCD_H_RES, EXAMPLE_LCD_V_RES, buff);
+    vTaskDelay(pdMS_TO_TICKS(2000));
+    for (size_t i = 0; i < EXAMPLE_LCD_BUF_SIZE / 2; i++)
+    {
+        buff[i] = ST7735_BLUE;
+    }
+    esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, EXAMPLE_LCD_H_RES, EXAMPLE_LCD_V_RES, buff);
     // free(buff);
 }
