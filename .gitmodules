@@ -1,0 +1,3 @@
+[submodule "lvgl_demo/components/lvgl"]
+	path = lvgl_demo/components/lvgl
+	url = https://gitee.com/my_lvgl/lvgl.git
