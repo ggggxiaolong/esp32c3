@@ -24,7 +24,7 @@
 // #include "esp_check.h"
 #include "esp_lcd_panel_st7735.h"
 
-// static const char *TAG = "lcd_panel.st7735";
+static const char *TAG = "lcd_panel.st7735";
 
 static esp_err_t panel_st7735_del(esp_lcd_panel_t *panel);
 static esp_err_t panel_st7735_reset(esp_lcd_panel_t *panel);
@@ -154,6 +154,7 @@ static esp_err_t panel_st7735_init(esp_lcd_panel_t *panel)
     st7735_panel_t *st7735 = __containerof(panel, st7735_panel_t, base);
     esp_lcd_panel_io_handle_t io = st7735->io;
     //--------------------------------------------------合宙 ST7735v--------------------------------------------------------------------------------
+    /**
     // Frame rate=fosc/((RTNB + 20) x (LINE + FPB + BPB))   fosc = 333kHz
     //  2: out of sleep mode, no args, w/delay 退出睡眠模式
     esp_lcd_panel_io_tx_param(io, ST7735_SLPOUT, NULL, 0);
@@ -191,10 +192,10 @@ static esp_err_t panel_st7735_init(esp_lcd_panel_t *panel)
     esp_lcd_panel_io_tx_param(io, ST7735_MADCTL, (uint8_t[]){0x78}, 1);
     esp_lcd_panel_io_tx_param(io, ST7735_DISPON, NULL, 0);
     vTaskDelay(pdMS_TO_TICKS(100));
-
+*/
     //----------------------------------------------------lvgl ST7735S-------------------------------------------------------------
-    /**
-    esp_lcd_panel_io_tx_param(io, ST7735_SWRESET, NULL, 0);
+    // /**
+   esp_lcd_panel_io_tx_param(io, ST7735_SWRESET, NULL, 0);
     vTaskDelay(pdMS_TO_TICKS(120));
     esp_lcd_panel_io_tx_param(io, ST7735_SLPOUT, NULL, 0);
     vTaskDelay(pdMS_TO_TICKS(120));
@@ -213,9 +214,11 @@ static esp_err_t panel_st7735_init(esp_lcd_panel_t *panel)
     esp_lcd_panel_io_tx_param(io, ST7735_GAMCTRP1, (uint8_t[]){0x02, 0x1c, 0x07, 0x12, 0x37, 0x32, 0x29, 0x2d, 0x29, 0x25, 0x2B, 0x39, 0x00, 0x01, 0x03, 0x10}, 16);
     esp_lcd_panel_io_tx_param(io, ST7735_GAMCTRN1, (uint8_t[]){0x03, 0x1d, 0x07, 0x06, 0x2E, 0x2C, 0x29, 0x2D, 0x2E, 0x2E, 0x37, 0x3F, 0x00, 0x00, 0x02, 0x10}, 16);
     esp_lcd_panel_io_tx_param(io, ST7735_NORON, NULL, 0);
+    vTaskDelay(pdMS_TO_TICKS(10));
     esp_lcd_panel_io_tx_param(io, ST7735_DISPON, NULL, 0);
-    esp_lcd_panel_io_tx_param(io, ST7735_MADCTL, (uint8_t[]){0xa8}, 1);
-    */
+    vTaskDelay(pdMS_TO_TICKS(100));
+    esp_lcd_panel_io_tx_param(io, ST7735_MADCTL, (uint8_t[]){0x78}, 1);
+    // */
     return ESP_OK;
 }
 

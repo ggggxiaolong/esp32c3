@@ -23,8 +23,6 @@
 #include "esp_log.h"
 #include "esp_check.h"
 
-static const char *TAG = "st7735";
-
 typedef struct
 {
     esp_lcd_panel_t base;
