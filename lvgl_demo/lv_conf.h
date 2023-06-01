@@ -56,7 +56,7 @@
 /*Enable and configure the built-in (v)snprintf */
 #define LV_USE_BUILTIN_SNPRINTF 1
 #if LV_USE_BUILTIN_SNPRINTF
-    #define LV_SPRINTF_USE_FLOAT 0
+    #define LV_SPRINTF_USE_FLOAT 1
 #endif  /*LV_USE_BUILTIN_SNPRINTF*/
 
 #define LV_STDLIB_INCLUDE <stdint.h>
@@ -280,7 +280,7 @@
 
 /*1: Show CPU usage and FPS count
  * Requires `LV_USE_SYSMON = 1`*/
-#define LV_USE_PERF_MONITOR 1
+#define LV_USE_PERF_MONITOR 0
 #if LV_USE_PERF_MONITOR
     #define LV_USE_PERF_MONITOR_POS LV_ALIGN_BOTTOM_RIGHT
 

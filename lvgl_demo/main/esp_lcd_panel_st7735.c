@@ -24,7 +24,7 @@
 // #include "esp_check.h"
 #include "esp_lcd_panel_st7735.h"
 
-// static const char *TAG = "lcd_panel.st7735";
+static const char *TAG = "st7735";
 
 static esp_err_t panel_st7735_del(esp_lcd_panel_t *panel);
 static esp_err_t panel_st7735_reset(esp_lcd_panel_t *panel);
@@ -156,65 +156,68 @@ static esp_err_t panel_st7735_init(esp_lcd_panel_t *panel)
     //--------------------------------------------------合宙 ST7735v--------------------------------------------------------------------------------
     // Frame rate=fosc/((RTNB + 20) x (LINE + FPB + BPB))   fosc = 333kHz
     //  2: out of sleep mode, no args, w/delay 退出睡眠模式
-    // esp_lcd_panel_io_tx_param(io, ST7735_SLPOUT, NULL, 0);
-    // vTaskDelay(pdMS_TO_TICKS(120));
-    // // 13: invert display, no args, no delay 打开返显模式， 颜色反转
-    // esp_lcd_panel_io_tx_param(io, ST7735_INVON, NULL, 0);
-    // //  3: frame rate control - normal mode, 3 args: 设置普通模式帧率
-    // esp_lcd_panel_io_tx_param(io, ST7735_FRMCTR1, (uint8_t[]){0x05, 0x3a, 0x3a}, 3);
-    // //  4: frame rate control - idle mode, 3 args:
-    // esp_lcd_panel_io_tx_param(io, ST7735_FRMCTR2, (uint8_t[]){0x05, 0x3a, 0x3a}, 3);
-    // //  5: frame rate control - partial mode, 6 args:
-    // esp_lcd_panel_io_tx_param(io, ST7735_FRMCTR3, (uint8_t[]){0x05, 0x3a, 0x3a, 0x05, 0x3a, 0x3a}, 6);
-    // //  6: display inversion control, 1 arg, no delay: 显示反转控制
-    // esp_lcd_panel_io_tx_param(io, ST7735_INVCTR, (uint8_t[]){0x03}, 1);
-    // //  7: power control, 3 args, no delay:功率控制
-    // esp_lcd_panel_io_tx_param(io, ST7735_PWCTR1, (uint8_t[]){0x62, 0x02, 0x04}, 3);
-    // //  8: power control, 1 arg, no delay: Set the VGH and VGL supply power level
-    // esp_lcd_panel_io_tx_param(io, ST7735_PWCTR2, (uint8_t[]){0xC0}, 1);
-    // //  9: power control, 2 args, no delay:
-    // esp_lcd_panel_io_tx_param(io, ST7735_PWCTR3, (uint8_t[]){0x0d, 0x00}, 2);
-    // // 10: power control, 2 args, no delay:
-    // esp_lcd_panel_io_tx_param(io, ST7735_PWCTR4, (uint8_t[]){0x8d, 0x6A}, 2);
-    // // 11: power control, 2 args, no delay:
-    // esp_lcd_panel_io_tx_param(io, ST7735_PWCTR5, (uint8_t[]){0x8d, 0xEE}, 2);
-    // // 12: power control, 1 arg, no delay: Set VCOMH Voltage
-    // esp_lcd_panel_io_tx_param(io, ST7735_VMCTR1, (uint8_t[]){0x0e}, 1);
-    // // 16: magical unicorn dust, 16 args, no delay:
-    // esp_lcd_panel_io_tx_param(io, ST7735_GAMCTRP1, (uint8_t[]){0x10, 0x0E, 0x02, 0x03, 0x0E, 0x07, 0x02, 0x07, 0x0A, 0x12, 0x27, 0x37, 0x00, 0x0D, 0x0E, 0x10}, 16);
-    // // 17: sparkles and rainbows, 16 args, no delay:
-    // esp_lcd_panel_io_tx_param(io, ST7735_GAMCTRN1, (uint8_t[]){0x10, 0x0E, 0x03, 0x03, 0x0F, 0x06, 0x02, 0x08, 0x0A, 0x26, 0x36, 0x00, 0x0D, 0x09, 0x0E, 0x10}, 16);
-    // // 15: set color mode, 1 arg, no delay:  颜色位宽：101->16bit
-    // esp_lcd_panel_io_tx_param(io, ST7735_COLMOD, (uint8_t[]){0x05}, 1);
-    // // 18: normal display on, no args, no delay 普通显示模式，关闭局部显示模式
-    // // 14: memory access control (directions), 1 arg: 地址顺序：右到左,底到顶，行列交换：否，刷新顺序:左到右，顶到底，颜色：BGR
-    // esp_lcd_panel_io_tx_param(io, ST7735_MADCTL, (uint8_t[]){0x78}, 1);
-    // esp_lcd_panel_io_tx_param(io, ST7735_DISPON, NULL, 0);
-    // vTaskDelay(pdMS_TO_TICKS(100));
+    
+    esp_lcd_panel_io_tx_param(io, ST7735_SLPOUT, NULL, 0);
+    vTaskDelay(pdMS_TO_TICKS(120));
+    // 13: invert display, no args, no delay 打开返显模式， 颜色反转
+    esp_lcd_panel_io_tx_param(io, ST7735_INVOFF, NULL, 0);
+    //  3: frame rate control - normal mode, 3 args: 设置普通模式帧率
+    esp_lcd_panel_io_tx_param(io, ST7735_FRMCTR1, (uint8_t[]){0x05, 0x3a, 0x3a}, 3);
+    //  4: frame rate control - idle mode, 3 args:
+    esp_lcd_panel_io_tx_param(io, ST7735_FRMCTR2, (uint8_t[]){0x05, 0x3a, 0x3a}, 3);
+    //  5: frame rate control - partial mode, 6 args:
+    esp_lcd_panel_io_tx_param(io, ST7735_FRMCTR3, (uint8_t[]){0x05, 0x3a, 0x3a, 0x05, 0x3a, 0x3a}, 6);
+    //  6: display inversion control, 1 arg, no delay: 显示反转控制
+    esp_lcd_panel_io_tx_param(io, ST7735_INVCTR, (uint8_t[]){0x03}, 1);
+    //  7: power control, 3 args, no delay:功率控制
+    esp_lcd_panel_io_tx_param(io, ST7735_PWCTR1, (uint8_t[]){0x62, 0x02, 0x04}, 3);
+    //  8: power control, 1 arg, no delay: Set the VGH and VGL supply power level
+    esp_lcd_panel_io_tx_param(io, ST7735_PWCTR2, (uint8_t[]){0xC0}, 1);
+    //  9: power control, 2 args, no delay:
+    esp_lcd_panel_io_tx_param(io, ST7735_PWCTR3, (uint8_t[]){0x0d, 0x00}, 2);
+    // 10: power control, 2 args, no delay:
+    esp_lcd_panel_io_tx_param(io, ST7735_PWCTR4, (uint8_t[]){0x8d, 0x6A}, 2);
+    // 11: power control, 2 args, no delay:
+    esp_lcd_panel_io_tx_param(io, ST7735_PWCTR5, (uint8_t[]){0x8d, 0xEE}, 2);
+    // 12: power control, 1 arg, no delay: Set VCOMH Voltage
+    esp_lcd_panel_io_tx_param(io, ST7735_VMCTR1, (uint8_t[]){0x0e}, 1);
+    // 16: magical unicorn dust, 16 args, no delay:
+    esp_lcd_panel_io_tx_param(io, ST7735_GAMCTRP1, (uint8_t[]){0x10, 0x0E, 0x02, 0x03, 0x0E, 0x07, 0x02, 0x07, 0x0A, 0x12, 0x27, 0x37, 0x00, 0x0D, 0x0E, 0x10}, 16);
+    // 17: sparkles and rainbows, 16 args, no delay:
+    esp_lcd_panel_io_tx_param(io, ST7735_GAMCTRN1, (uint8_t[]){0x10, 0x0E, 0x03, 0x03, 0x0F, 0x06, 0x02, 0x08, 0x0A, 0x26, 0x36, 0x00, 0x0D, 0x09, 0x0E, 0x10}, 16);
+    // 15: set color mode, 1 arg, no delay:  颜色位宽：101->16bit
+    esp_lcd_panel_io_tx_param(io, ST7735_COLMOD, (uint8_t[]){0x05}, 1);
+    // 18: normal display on, no args, no delay 普通显示模式，关闭局部显示模式
+    // 14: memory access control (directions), 1 arg: 地址顺序：右到左,底到顶，行列交换：否，刷新顺序:左到右，顶到底，颜色：BGR
+    esp_lcd_panel_io_tx_param(io, ST7735_MADCTL, (uint8_t[]){0x78}, 1);
+    esp_lcd_panel_io_tx_param(io, ST7735_DISPON, NULL, 0);
+    vTaskDelay(pdMS_TO_TICKS(100));
 
     //----------------------------------------------------lvgl ST7735S-------------------------------------------------------------
     // /**
-    esp_lcd_panel_io_tx_param(io, ST7735_SWRESET, NULL, 0);
-    vTaskDelay(pdMS_TO_TICKS(120));
-    esp_lcd_panel_io_tx_param(io, ST7735_SLPOUT, NULL, 0);
-    vTaskDelay(pdMS_TO_TICKS(120));
-    esp_lcd_panel_io_tx_param(io, ST7735_FRMCTR1, (uint8_t[]){0x01, 0x2C, 0x2D}, 3);
-    esp_lcd_panel_io_tx_param(io, ST7735_FRMCTR2, (uint8_t[]){0x01, 0x2C, 0x2D}, 3);
-    esp_lcd_panel_io_tx_param(io, ST7735_FRMCTR3, (uint8_t[]){0x01, 0x2C, 0x2D, 0x01, 0x2C, 0x2D}, 6);
-    esp_lcd_panel_io_tx_param(io, ST7735_INVCTR, (uint8_t[]){0x07}, 1);
-    esp_lcd_panel_io_tx_param(io, ST7735_PWCTR1, (uint8_t[]){0xA2, 0x02, 0x84}, 3);
-    esp_lcd_panel_io_tx_param(io, ST7735_PWCTR2, (uint8_t[]){0xC5}, 1);
-    esp_lcd_panel_io_tx_param(io, ST7735_PWCTR3, (uint8_t[]){0x0A, 0x00}, 2);
-    esp_lcd_panel_io_tx_param(io, ST7735_PWCTR4, (uint8_t[]){0x8A, 0x2A}, 2);
-    esp_lcd_panel_io_tx_param(io, ST7735_PWCTR5, (uint8_t[]){0x8d, 0xEE}, 2);
-    esp_lcd_panel_io_tx_param(io, ST7735_VMCTR1, (uint8_t[]){0x0e}, 1);
-    esp_lcd_panel_io_tx_param(io, ST7735_INVON, NULL, 0);
-    esp_lcd_panel_io_tx_param(io, ST7735_COLMOD, (uint8_t[]){0x05}, 1);
-    esp_lcd_panel_io_tx_param(io, ST7735_GAMCTRP1, (uint8_t[]){0x02, 0x1c, 0x07, 0x12, 0x37, 0x32, 0x29, 0x2d, 0x29, 0x25, 0x2B, 0x39, 0x00, 0x01, 0x03, 0x10}, 16);
-    esp_lcd_panel_io_tx_param(io, ST7735_GAMCTRN1, (uint8_t[]){0x03, 0x1d, 0x07, 0x06, 0x2E, 0x2C, 0x29, 0x2D, 0x2E, 0x2E, 0x37, 0x3F, 0x00, 0x00, 0x02, 0x10}, 16);
-    esp_lcd_panel_io_tx_param(io, ST7735_NORON, NULL, 0);
-    esp_lcd_panel_io_tx_param(io, ST7735_DISPON, NULL, 0);
-    esp_lcd_panel_io_tx_param(io, ST7735_MADCTL, (uint8_t[]){0xa8}, 1);
+    // esp_lcd_panel_io_tx_param(io, ST7735_SWRESET, NULL, 0);
+    // vTaskDelay(pdMS_TO_TICKS(120));
+    // esp_lcd_panel_io_tx_param(io, ST7735_SLPOUT, NULL, 0);
+    // vTaskDelay(pdMS_TO_TICKS(120));
+    // esp_lcd_panel_io_tx_param(io, ST7735_FRMCTR1, (uint8_t[]){0x01, 0x2C, 0x2D}, 3);
+    // esp_lcd_panel_io_tx_param(io, ST7735_FRMCTR2, (uint8_t[]){0x01, 0x2C, 0x2D}, 3);
+    // esp_lcd_panel_io_tx_param(io, ST7735_FRMCTR3, (uint8_t[]){0x01, 0x2C, 0x2D, 0x01, 0x2C, 0x2D}, 6);
+    // esp_lcd_panel_io_tx_param(io, ST7735_INVCTR, (uint8_t[]){0x07}, 1);
+    // esp_lcd_panel_io_tx_param(io, ST7735_PWCTR1, (uint8_t[]){0xA2, 0x02, 0x84}, 3);
+    // esp_lcd_panel_io_tx_param(io, ST7735_PWCTR2, (uint8_t[]){0xC5}, 1);
+    // esp_lcd_panel_io_tx_param(io, ST7735_PWCTR3, (uint8_t[]){0x0A, 0x00}, 2);
+    // esp_lcd_panel_io_tx_param(io, ST7735_PWCTR4, (uint8_t[]){0x8A, 0x2A}, 2);
+    // esp_lcd_panel_io_tx_param(io, ST7735_PWCTR5, (uint8_t[]){0x8d, 0xEE}, 2);
+    // esp_lcd_panel_io_tx_param(io, ST7735_VMCTR1, (uint8_t[]){0x0e}, 1);
+    // esp_lcd_panel_io_tx_param(io, ST7735_INVON, NULL, 0);
+    // esp_lcd_panel_io_tx_param(io, ST7735_COLMOD, (uint8_t[]){0x05}, 1);
+    // esp_lcd_panel_io_tx_param(io, ST7735_GAMCTRP1, (uint8_t[]){0x02, 0x1c, 0x07, 0x12, 0x37, 0x32, 0x29, 0x2d, 0x29, 0x25, 0x2B, 0x39, 0x00, 0x01, 0x03, 0x10}, 16);
+    // esp_lcd_panel_io_tx_param(io, ST7735_GAMCTRN1, (uint8_t[]){0x03, 0x1d, 0x07, 0x06, 0x2E, 0x2C, 0x29, 0x2D, 0x2E, 0x2E, 0x37, 0x3F, 0x00, 0x00, 0x02, 0x10}, 16);
+    // esp_lcd_panel_io_tx_param(io, ST7735_NORON, NULL, 0);
+    // vTaskDelay(pdMS_TO_TICKS(10));
+    // esp_lcd_panel_io_tx_param(io, ST7735_DISPON, NULL, 0);
+    // vTaskDelay(pdMS_TO_TICKS(100));
+    // esp_lcd_panel_io_tx_param(io, ST7735_MADCTL, (uint8_t[]){0x78}, 1);
     // */
     return ESP_OK;
 }
